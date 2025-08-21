@@ -21,6 +21,13 @@ class Solution {
             }
             return curr;
          }
+         public TreeNode MaxNode(TreeNode root){
+            TreeNode curr = root;
+            while(curr.right != null){
+                curr = curr.right;
+            }
+            return curr;
+         }
 
     public TreeNode deleteNode(TreeNode root, int key) {
         //traverse till we find the desired node, not found return null
@@ -45,10 +52,18 @@ class Solution {
                     //we have left and right children
                     //find minimum element in right subtree and replace it with our node
                     //then delete this node
+                    /*
                     TreeNode x = MinNode(root.right);
                     root.val = x.val;
                     root.right = deleteNode(root.right,x.val);
                     return root;
+                    */
+                    //find maximum element in left subtree and replace with our node
+                    TreeNode x = MaxNode(root.left);
+                    root.val = x.val;
+                    root.left = deleteNode(root.left, x.val);
+                    return root;
+
 
                 }
             }
