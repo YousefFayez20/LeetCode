@@ -16,47 +16,44 @@
 class Solution {
          public TreeNode MinNode(TreeNode root){
             TreeNode curr = root;
-                while (curr != null && curr.left != null){
-                    curr = curr.left;}
-                    //now we got the minimum
-                    //if the minimum node has right child
-                    return curr;
+            while(curr.left != null){
+                curr = curr.left;
+            }
+            return curr;
          }
 
     public TreeNode deleteNode(TreeNode root, int key) {
         //traverse till we find the desired node, not found return null
-        if(root == null){
-            return null;
-        }
-
-        if(root.val > key ){
-            root.left = deleteNode(root.left,key);
+        if(root == null) return null;
+        //we will search subtrees if they have the element
+        if(root.val > key){
+            root.left = deleteNode(root.left, key);
         }else if(root.val < key){
-            root.right = deleteNode(root.right,key);
-        }else{
-            //if we returned null, we may detach the tree if the node has children
-            if(root.right == null && root.left == null){
-                return null;
-            }else if(root.right != null && root.left == null){
-                return root.right;
-            }else if(root.right == null && root.left != null){
-                return root.left;
-            }else{
-                // we will search for the smallest leaf node and put in the node's place
-                TreeNode minimumnode = MinNode(root.right);
-                root.val = minimumnode.val;
-                root.right = deleteNode(root.right, minimumnode.val);
-                
-
-
-
-
+            root.right = deleteNode(root.right, key);
             }
+        else{
+                // we found the element now we should handle the cases
+
+                //case 1: node have no children -> return null
+                if(root.right == null && root.left == null){
+                    return null;
+                }else if(root.left == null){//case 2: have one right child
+                return root.right;
+                }else if(root.right == null){//case 2: have one left child
+                return root.left;
+                }else{
+                    //we have left and right children
+                    //find minimum element in right subtree and replace it with our node
+                    //then delete this node
+                    TreeNode x = MinNode(root.right);
+                    root.val = x.val;
+                    root.right = deleteNode(root.right,x.val);
+                    return root;
+
+                }
+            }
+            return root;
         }
-        return root;
-
-
-
-
+       
+            
     }
-}
