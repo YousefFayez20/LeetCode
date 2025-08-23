@@ -15,28 +15,27 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-    //we need a stack to store ordered elements
-    Stack<TreeNode> stack = new Stack<>();
-    //traverse and till the most left subtree, add the leftmost then pop and add n
-    int n = 0;
-    //go to the right subtree and travese left, if not found add and pop and n++
-    TreeNode curr = root;
-    TreeNode x = root;
-    while (curr != null || !stack.empty()){
-        while(curr != null){
-            stack.push(curr);
-            curr = curr.left;
-        }
-        
-        curr = stack.pop();
-        n++;
-        if(n == k){
-            return curr.val;
-        }
+        //we need stack to store nodes
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode curr = root;
+        int counter = 0;
+        while(curr != null || !stack.empty()){
+            while(curr != null){
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            counter++;
+            if(counter == k){
+                return curr.val;
+            }
             curr = curr.right;
-        
-    }
-    return -1;
+
+        }
+        return 0;
+
+    
+    
     
     }
 
