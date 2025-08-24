@@ -44,14 +44,6 @@ class Solution {
             }
             levels++;
 
-          
-            
-            
-              
-          
-            
-            
-
     
         }
         return levellist;
