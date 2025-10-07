@@ -1,20 +1,16 @@
 class Solution {
-    int[] memo  = new int[1001];
-    public int minCostClimbingStairs(int[] cost) {
-        for (int i = 0; i < memo.length; i++) {
-    memo[i] = -1;
-}
-        return Math.min(minCostClimbingStairsHandler(0,cost),minCostClimbingStairsHandler(1,cost));
     
+    public int minCostClimbingStairs(int[] cost) {
+        int[] dp = new int[cost.length+1];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for(int i = 2;i<dp.length-1;i++){
+            dp[i] = cost[i] + Math.min(dp[i-1],dp[i-2]);
+        }
+        dp[dp.length-1] = 0 + Math.min(dp[dp.length-2],dp[dp.length-3]);
+        return dp[dp.length-1];
+      
         
     }
-    public int minCostClimbingStairsHandler(int index ,int[] cost){
-        if(index >= cost.length){
-            return 0;
-        }
-        if(memo[index] != -1){
-            return memo[index];
-        }
-        return memo[index]= cost[index] + Math.min(minCostClimbingStairsHandler(index+1,cost),minCostClimbingStairsHandler(index+2,cost));
-    }
+  
 }
