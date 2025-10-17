@@ -19,6 +19,9 @@ class Solution {
             double[] x = pq.poll();
             int node = (int)x[0];
             double weight = x[1];
+            if(shortest.containsKey(end_node)){
+               return shortest.get(end_node);
+            }
             if(shortest.containsKey(node)){
                 continue;
             }
