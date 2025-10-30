@@ -1,7 +1,6 @@
-import java.util.Hashtable;
 class Solution {
     public int totalFruit(int[] fruits) {
-        Hashtable<Integer,Integer> baskets = new Hashtable<>();
+        HashMap<Integer,Integer> baskets = new HashMap<>();
         // size == 2, calculate window size , <Fruit,count>
         int windowStart = 0;
         int windowSize = 0;
