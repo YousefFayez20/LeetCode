@@ -15,24 +15,12 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        if(root == null) return 0;
-        return DepthDfs(root,0);
-    }
-    public int DepthDfs(TreeNode root, int count){
-             if(root != null){
-               count++;
-               }
-               if(root == null){
-                return count;
-               }
-        int DepthLeft = DepthDfs(root.left,count);
-        int DepthRight = DepthDfs(root.right,count);
-        if(DepthLeft > DepthRight){
-            return DepthLeft;
-        }else{
-           return DepthRight;
+        if(root == null){
+            return 0;
         }
-
-
+        int left_length = 1 + maxDepth(root.left);
+        int right_length = 1 +  maxDepth(root.right);
+        return Math.max(left_length,right_length);
+        
     }
 }
