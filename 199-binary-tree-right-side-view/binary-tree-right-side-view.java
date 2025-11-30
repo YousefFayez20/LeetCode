@@ -15,36 +15,26 @@
  */
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<Integer> levels = new ArrayList<>();
-        boolean FoundTopLevel = false;
+        List<Integer> rights = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         if(root != null){
             queue.offer(root);
-            levels.add(root.val);
         }
         while(!queue.isEmpty()){
-
-            int numberoflevels = queue.size();
-            for(int i = 0; i<numberoflevels;i++){
+            int levels = queue.size();
+            boolean foundright = false;
+            for(int i=0;i<levels;i++){
                 TreeNode curr = queue.poll();
-                if(curr.right != null){
-                    queue.offer(curr.right);
-                    if(FoundTopLevel == false){
-                        levels.add(curr.right.val);
-                        FoundTopLevel = true;
-                    }
-                }
-                if(curr.left != null){
-                    queue.offer(curr.left);
-                    if(FoundTopLevel == false){
-                        levels.add(curr.left.val);
-                        FoundTopLevel = true;
-                    }
-                }
+                if(foundright == false){
+                    rights.add(curr.val);
+                    foundright = true;
+                } 
+                if(curr.right != null) queue.add(curr.right);
+                if(curr.left != null) queue.add(curr.left);
             }
-            FoundTopLevel = false;
-
+            foundright = false;
         }
-        return levels;
+        return rights;
+        
     }
 }
