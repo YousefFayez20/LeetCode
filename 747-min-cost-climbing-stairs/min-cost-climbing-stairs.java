@@ -1,16 +1,14 @@
 class Solution {
-    
+    HashMap<Integer,Integer> cache = new HashMap<>();
+    int total_cost =0;
     public int minCostClimbingStairs(int[] cost) {
-        int[] dp = new int[cost.length+1];
-        dp[0] = cost[0];
-        dp[1] = cost[1];
-        for(int i = 2;i<dp.length-1;i++){
-            dp[i] = cost[i] + Math.min(dp[i-1],dp[i-2]);
+        cache.put(0,cost[0]);
+        cache.put(1,cost[1]);
+        for(int i = 2;i<cost.length;i++){
+        cache.put(i, cost[i]+ Math.min(cache.get(i-1),cache.get(i-2)));
         }
-        dp[dp.length-1] = 0 + Math.min(dp[dp.length-2],dp[dp.length-3]);
-        return dp[dp.length-1];
-      
+       return Math.min(cache.get(cost.length-1),cache.get(cost.length-2));
         
     }
-  
+    
 }
