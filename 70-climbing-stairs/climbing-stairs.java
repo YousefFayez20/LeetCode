@@ -1,15 +1,14 @@
 class Solution {
+    HashMap<Integer,Integer> cache = new HashMap<>();
     public int climbStairs(int n) {
-       int a = 2, b = 3;
-       if(n <= b){
-        return n;
-       }
-       for(int i = 4; i<=n;i++){
-        int steps = a+b;
-        a=b;
-        b=steps;
-       }
-       return b;
-        
+        if( n <= 2){
+            return n;
+        }
+        if(cache.get(n) != null){
+            return cache.get(n);
+        }else{
+            cache.put(n,climbStairs(n-1)+climbStairs(n-2));
+        }
+        return cache.get(n);
     }
 }
