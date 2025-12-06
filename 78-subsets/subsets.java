@@ -1,21 +1,23 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> sets = new ArrayList<>();
-        backtrack(0,sets,new ArrayList<Integer>(),nums);
-        return sets;
-    
+        List<List<Integer>> subsets = new ArrayList<>();
+        List<Integer> subset = new ArrayList<>();
+        backtracking(0,nums,subsets,subset);
+        return subsets;
+
+
     }
-    public void backtrack(int index, List<List<Integer>> sets, List<Integer> set, int[] nums){
+    void backtracking(int index, int[]nums,List<List<Integer>> subsets,List<Integer> subset){
         if(index == nums.length){
-            sets.add(new ArrayList<>(set));
+            subsets.add(new ArrayList<>(subset));
             return;
         }
-        set.add(nums[index]);
-        backtrack(index+1,sets,set,nums);
-        set.remove(set.size()-1);
-        backtrack(index+1,sets,set,nums);
-
+        subset.add(nums[index]);
+        backtracking(index+1,nums,subsets,subset);
+        subset.remove(subset.size()-1);
+        backtracking(index+1,nums,subsets,subset);
 
         
+
     }
 }
