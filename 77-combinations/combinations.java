@@ -1,25 +1,21 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
-        List<Integer> CurSet = new ArrayList<>();
-        List<List<Integer>> Combinations = new ArrayList<>();
-        backtracking(CurSet,Combinations,1,n,k);
-        return Combinations;
-
+        List<List<Integer>> combinations = new ArrayList<>();
+        List<Integer> combination = new ArrayList<>();
+        backtracking(combinations,combination,1,n,k);
+        return combinations;
     }
-    public void backtracking(List<Integer> CurSet,List<List<Integer>> Combinations,int index, int n, int k){
-        if(CurSet.size() == k){
-            Combinations.add(new ArrayList<>(CurSet));
+    void backtracking(List<List<Integer>> combinations,List<Integer> combination,int i,int n, int k){
+        if(combination.size() == k){
+            combinations.add(new ArrayList<>(combination));
             return;
         }
-        if(index>n){
+        if(i>n){
             return;
         }
-
-
-        CurSet.add(index);
-        backtracking(CurSet,Combinations,index+1,n,k);
-        CurSet.remove(CurSet.size() -1);
-        backtracking(CurSet,Combinations,index+1,n,k);
-
+        combination.add(i);
+        backtracking(combinations,combination,i+1,n,k);
+        combination.remove(combination.size()-1);
+        backtracking(combinations,combination,i+1,n,k);
     }
 }
