@@ -1,17 +1,22 @@
 class Solution {
     public int uniquePaths(int m, int n) {
-        int[][] dp = new int[m][n];
-        for(int i =0;i<m;i++){
-            dp[i][0] = 1; 
+        boolean[][] visited = new boolean[m][n];
+        int[][] memoization = new int[m][n];
+        return dfs(0,0,m,n,visited,memoization);
+    }
+    int dfs(int r,int c,int m, int n,boolean[][] visited,int[][] memoization){
+        if(Math.min(r,c)<0||r==m||c==n|| visited[r][c] ==true){
+            return 0;
         }
-        for(int j = 0;j<n;j++){
-            dp[0][j] = 1;
-        }
-        for(int i = 1;i<m;i++){
-            for(int j = 1;j<n;j++){
-                dp[i][j] = dp[i][j-1]+dp[i-1][j];
-            }
-        }
-        return dp[m-1][n-1];
+        if(r == m-1 && c == n-1) return 1;
+        if(memoization[r][c] != 0) return memoization[r][c];
+        int count =0;
+        visited[r][c] = true;
+        count += dfs(r+1,c,m,n,visited,memoization);
+        count += dfs(r,c+1,m,n,visited,memoization);
+        memoization[r][c] = count;
+        visited[r][c] = false;
+        return memoization[r][c];
+
     }
 }
