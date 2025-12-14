@@ -1,15 +1,11 @@
 class Solution {
     public boolean isPalindrome(String s) {
-        // we will have 2 pointers , one at the start and the other at the end
-        //we will compare each pair, if not matched -> false, if L>R ->TRUE
-       
-        String x = s.toLowerCase().replaceAll("[^a-z0-9]", "");
-         int L = 0;
-        int R = x.length() -1;
+        s= s.replaceAll("[^a-zA-Z0-9]","");
+        s=s.toLowerCase();
+        int L=0;
+        int R=s.length()-1;
         while(L<R){
-            if(x.charAt(L) != x.charAt(R)){
-                return false;
-            }
+            if(s.charAt(L) != s.charAt(R)) return false;
             L++;
             R--;
         }
