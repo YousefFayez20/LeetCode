@@ -1,38 +1,20 @@
 class Solution {
-    
-       
     public void moveZeroes(int[] nums) {
-        //maintain zero pointer, non zero pointer
-        int zeroP = 0;
-        int NonZero = 0;
-        if(nums.length == 1){
-            return;
+        int zero =0;
+        int nzero =0;
+        while(zero<nums.length &&nzero<nums.length ){
+            if(nums[zero] !=0) zero++;
+            else if(nums[zero] == 0 &&nums[nzero]==0) nzero++;
+            else if(nums[zero] == 0 &&nums[nzero]!=0 && zero<nzero){
+                int temp = nums[zero];
+                nums[zero] = nums[nzero];
+                nums[nzero] = temp;
+            }else if(nums[zero] == 0 &&nums[nzero]!=0 && zero>=nzero){
+                nzero++;
+            }else{
+                zero++;
+            }
         }
-        while (zeroP < nums.length){
-           
-            if(nums[zeroP] != 0){
-                zeroP++;
-                
-            }
-            if(nums[zeroP] == 0 && nums[NonZero] != 0 && zeroP < NonZero){
-                int temp = nums[zeroP];
-                nums[zeroP] = nums[NonZero];
-                nums[NonZero] = temp;
-                zeroP++;
-                
-            }
-            NonZero++;
-            if(NonZero >= nums.length  || zeroP >=nums.length-1){
-                break;
-            }
-            /*
-            for(int x : nums){
-                System.out.print(x);
-            }
-            System.out.println();*/
-            
-        }
-      
-        
+
     }
 }
