@@ -15,6 +15,7 @@ class Solution {
                 numberOfVowels++;
             }
             max = Math.max(max,numberOfVowels);
+            if(max == k) return k;
              if(sb.length() == k){
                 if(vowels.contains(s.charAt(i-(k-1))))numberOfVowels--;
                 sb.deleteCharAt(0);
